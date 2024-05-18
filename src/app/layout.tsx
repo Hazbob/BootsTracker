@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { link } from "fs";
+import { Button } from "@/components/ui/button";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,24 +21,26 @@ const employees = [
 ];
 
 export default function RootLayout({
-  children,
-}: Readonly<{
+                                     children,
+                                   }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+      <html lang="en">
       <body className={inter.className}>
-        <header>
-          <nav>
-            <ul>
-              {employees.map((emp, index) => {
-                return <li key={emp + index}>{emp}</li>;
-              })}
-            </ul>
-          </nav>
-        </header>
-        {children}
+      <nav className="w-full">
+        <ul className="flex w-full justify-center">
+          {employees.map((emp, index) => {
+            return (
+                <li key={emp + index} className="flex-grow">
+                  <Button className="w-full">{emp}</Button>
+                </li>
+            );
+          })}
+        </ul>
+      </nav>
+      {children}
       </body>
-    </html>
+      </html>
   );
 }
